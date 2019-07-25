@@ -35,7 +35,8 @@ class TopVC: UIViewController, StoryboardView {
         shell = Shell(host: "raspberry.local", port: 22)
 
         guard let shell = shell else { return }
-
+        shell.log.enabled = true
+        
         shell.withCallback { (string: String?, error: String?) in
             print("\(string ?? error!)")
             }
