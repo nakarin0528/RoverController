@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0E21FB8ACDCF7BBDCE6C05D9 /* Pods_RoverClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE44019A80912657DE2C4B5B /* Pods_RoverClient.framework */; };
-		DB03F76822EA06B500510357 /* TopViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB03F76722EA06B500510357 /* TopViewReactor.swift */; };
+		DB1B217822EBD8AF0027223D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B217722EBD8AF0027223D /* LoginVC.swift */; };
+		DB1B217E22EBDA930027223D /* SSHViewControlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B217D22EBDA930027223D /* SSHViewControlerProtocol.swift */; };
+		DB1B218122EBDC030027223D /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B218022EBDC030027223D /* DefaultButton.swift */; };
+		DB1B218322EBDF030027223D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B218222EBDF030027223D /* Constant.swift */; };
 		DBC317FE22E9EC41000AAC8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC317FD22E9EC41000AAC8D /* AppDelegate.swift */; };
-		DBC3180022E9EC41000AAC8D /* TopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC317FF22E9EC41000AAC8D /* TopVC.swift */; };
+		DBC3180022E9EC41000AAC8D /* ShellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC317FF22E9EC41000AAC8D /* ShellVC.swift */; };
 		DBC3180522E9EC42000AAC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC3180422E9EC42000AAC8D /* Assets.xcassets */; };
 		DBC3180822E9EC42000AAC8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBC3180622E9EC42000AAC8D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,10 +21,13 @@
 /* Begin PBXFileReference section */
 		782C5BE78A00DB6C78EEAC69 /* Pods-RoverClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoverClient.release.xcconfig"; path = "Target Support Files/Pods-RoverClient/Pods-RoverClient.release.xcconfig"; sourceTree = "<group>"; };
 		CBC337B545701922C21157D4 /* Pods-RoverClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoverClient.debug.xcconfig"; path = "Target Support Files/Pods-RoverClient/Pods-RoverClient.debug.xcconfig"; sourceTree = "<group>"; };
-		DB03F76722EA06B500510357 /* TopViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewReactor.swift; sourceTree = "<group>"; };
+		DB1B217722EBD8AF0027223D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		DB1B217D22EBDA930027223D /* SSHViewControlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHViewControlerProtocol.swift; sourceTree = "<group>"; };
+		DB1B218022EBDC030027223D /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
+		DB1B218222EBDF030027223D /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		DBC317FA22E9EC41000AAC8D /* RoverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC317FD22E9EC41000AAC8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DBC317FF22E9EC41000AAC8D /* TopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopVC.swift; sourceTree = "<group>"; };
+		DBC317FF22E9EC41000AAC8D /* ShellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellVC.swift; sourceTree = "<group>"; };
 		DBC3180422E9EC42000AAC8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBC3180722E9EC42000AAC8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBC3180922E9EC42000AAC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,8 +58,7 @@
 		DB03F76522EA064000510357 /* TopView */ = {
 			isa = PBXGroup;
 			children = (
-				DBC317FF22E9EC41000AAC8D /* TopVC.swift */,
-				DB03F76722EA06B500510357 /* TopViewReactor.swift */,
+				DBC317FF22E9EC41000AAC8D /* ShellVC.swift */,
 			);
 			path = TopView;
 			sourceTree = "<group>";
@@ -61,9 +66,27 @@
 		DB03F76622EA069500510357 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DB1B217622EBD89C0027223D /* LoginView */,
 				DB03F76522EA064000510357 /* TopView */,
+				DB1B217D22EBDA930027223D /* SSHViewControlerProtocol.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DB1B217622EBD89C0027223D /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B217722EBD8AF0027223D /* LoginVC.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		DB1B217F22EBDBF20027223D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B218022EBDC030027223D /* DefaultButton.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		DBC317F122E9EC41000AAC8D = {
@@ -87,11 +110,13 @@
 		DBC317FC22E9EC41000AAC8D /* RoverClient */ = {
 			isa = PBXGroup;
 			children = (
+				DB1B217F22EBDBF20027223D /* Common */,
 				DBC317FD22E9EC41000AAC8D /* AppDelegate.swift */,
 				DB03F76622EA069500510357 /* ViewControllers */,
 				DBC3180422E9EC42000AAC8D /* Assets.xcassets */,
 				DBC3180622E9EC42000AAC8D /* LaunchScreen.storyboard */,
 				DBC3180922E9EC42000AAC8D /* Info.plist */,
+				DB1B218222EBDF030027223D /* Constant.swift */,
 			);
 			path = RoverClient;
 			sourceTree = "<group>";
@@ -218,9 +243,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBC3180022E9EC41000AAC8D /* TopVC.swift in Sources */,
-				DB03F76822EA06B500510357 /* TopViewReactor.swift in Sources */,
+				DB1B218122EBDC030027223D /* DefaultButton.swift in Sources */,
+				DBC3180022E9EC41000AAC8D /* ShellVC.swift in Sources */,
+				DB1B217822EBD8AF0027223D /* LoginVC.swift in Sources */,
 				DBC317FE22E9EC41000AAC8D /* AppDelegate.swift in Sources */,
+				DB1B217E22EBDA930027223D /* SSHViewControlerProtocol.swift in Sources */,
+				DB1B218322EBDF030027223D /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
