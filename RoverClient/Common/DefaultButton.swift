@@ -11,7 +11,6 @@ import Material
 
 final class DefaultButton: Button {
 
-
     init(title: String?, titleColor: UIColor? = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: CGFloat = 20) {
         super.init(frame: CGRect.zero)
         self.title = title

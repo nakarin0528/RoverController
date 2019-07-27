@@ -15,6 +15,10 @@ import SwiftyUserDefaults
 
 final class LoginVC: UIViewController {
 
+    var disposeBag = DisposeBag()
+
+    private let headerView = HeaderView(title: "接続先")
+
     private let hostLabel: UILabel = {
         let label = UILabel()
         label.text = "HostName:"
@@ -97,7 +101,7 @@ final class LoginVC: UIViewController {
     private let connectButton: Button = {
         let btn = DefaultButton(title: "Connect")
         btn.titleColor = .white
-        btn.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        btn.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         btn.layer.cornerRadius = 20
         return btn
@@ -105,19 +109,60 @@ final class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = #colorLiteral(red: 0.3333333333, green: 0.7294117647, blue: 0.6745098039, alpha: 1)
         setupViews()
         setDefaultData()
+        bind()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if DeviceSize.type() == .iPhone {
+            configureObserver()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if DeviceSize.type() == .iPhone {
+            removeObserver()
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 
+    // Notificationを設定
+    func configureObserver() {
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    // キーボードが消えたときに、画面を戻す
+    @objc func keyboardWillHide(notification: Notification?) {
+        let duration: TimeInterval? = notification?.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? Double
+        UIView.animate(withDuration: duration!, animations: { () in
+            self.view.transform = CGAffineTransform.identity
+        })
+    }
+
+    // Notificationを削除
+    func removeObserver() {
+        let notification = NotificationCenter.default
+        notification.removeObserver(self)
+    }
+
     private func setupViews() {
+        self.view.addSubview(headerView)
+        headerView.snp.makeConstraints {
+            $0.top.right.equalToSuperview()
+            $0.left.equalTo(leftMargin())
+            $0.height.equalTo(DeviceSize.type() == .iPhone ? 50 : 80)
+        }
+
         self.view.addSubview(hostLabel)
         hostLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(self.view.layer.height/12)
+            $0.top.equalTo(headerView.snp.bottom).offset(15)
             $0.centerX.equalToSuperview().offset(-1 * self.view.layer.width/3)
         }
 
@@ -132,7 +177,7 @@ final class LoginVC: UIViewController {
         self.view.addSubview(portLabel)
         portLabel.snp.makeConstraints {
             $0.top.equalTo(hostLabel)
-            $0.left.equalTo(hostnameTextField.snp.right).offset(20)
+            $0.left.equalTo(hostnameTextField.snp.right).offset(15)
         }
 
         self.view.addSubview(portTextField)
@@ -145,7 +190,7 @@ final class LoginVC: UIViewController {
 
         self.view.addSubview(userNameLabel)
         userNameLabel.snp.makeConstraints {
-            $0.top.equalTo(hostnameTextField.snp.bottom).offset(20)
+            $0.top.equalTo(hostnameTextField.snp.bottom).offset(15)
             $0.left.equalTo(hostLabel)
         }
 
@@ -159,7 +204,7 @@ final class LoginVC: UIViewController {
 
         self.view.addSubview(passwordLabel)
         passwordLabel.snp.makeConstraints {
-            $0.top.equalTo(usernameTextField.snp.bottom).offset(20)
+            $0.top.equalTo(usernameTextField.snp.bottom).offset(15)
             $0.left.equalTo(hostLabel)
         }
 
@@ -180,6 +225,20 @@ final class LoginVC: UIViewController {
         }
     }
 
+    func bind() {
+        self.connectButton.rx.tap
+            .subscribe(onNext: {
+                if self.isValidConfiguration() {
+                    self.setCurrentData()
+                    let vc = ShellVC()
+                    self.present(vc, animated: true)
+                } else {
+                    Alert.notice(title: "入力漏れ", message: "全項目入力してください")
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
     private func setDefaultData() {
         hostnameTextField.text = Defaults[.hostname]
         if let port = Defaults[.port] {
@@ -189,9 +248,16 @@ final class LoginVC: UIViewController {
         passwordTextField.text = Defaults[.password]
     }
 
+    private func setCurrentData() {
+        Defaults[.hostname] = hostnameTextField.text
+        Defaults[.port] = Int(portTextField.text!)
+        Defaults[.username] = usernameTextField.text
+        Defaults[.password] = passwordTextField.text
+    }
+
     private func isValidConfiguration() -> Bool {
         guard !self.hostnameTextField.text!.isEmpty else { return false }
-        guard self.portTextField.text!.isEmpty else { return false }
+        guard !self.portTextField.text!.isEmpty else { return false }
         guard !self.usernameTextField.text!.isEmpty else { return false }
         guard !self.passwordTextField.text!.isEmpty else { return false }
 
@@ -209,14 +275,19 @@ extension LoginVC: UITextFieldDelegate {
             self.usernameTextField.becomeFirstResponder()
         } else if textField === self.usernameTextField && self.passwordTextField.isEnabled {
             self.passwordTextField.becomeFirstResponder()
-        } else if textField.returnKeyType == .go && self.isValidConfiguration() {
-
         }
+
         return false
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.connectButton.isEnabled = self.isValidConfiguration()
-    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField === self.passwordTextField {
+            UIView.animate(withDuration: 0.1, animations: { () in
+                let transform = CGAffineTransform(translationX: 0, y: -100)
+                self.view.transform = transform
+            })
+        }
 
+        return true
+    }
 }
