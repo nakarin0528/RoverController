@@ -17,7 +17,7 @@ final class LoginVC: UIViewController {
 
     var disposeBag = DisposeBag()
 
-    private let headerView = HeaderView(title: "接続先")
+    private let headerView = HeaderView(title: "RoboPad")
 
     private let hostLabel: UILabel = {
         let label = UILabel()
@@ -25,6 +25,12 @@ final class LoginVC: UIViewController {
         label.font = .systemFont(ofSize: 24)
         label.sizeToFit()
         return label
+    }()
+
+    private let helpButton: Button = {
+        let button = Button()
+        button.image = UIImage(named: "help")?.tint(with: .white)
+        return button
     }()
 
     private lazy var hostnameTextField: UITextField = {
@@ -113,6 +119,15 @@ final class LoginVC: UIViewController {
         setupViews()
         setDefaultData()
         bind()
+
+//        Helper.setACommand(command1: "ww", command2: "hh")
+//        Helper.setBCommand(command1: "ss", command2: "hh")
+//        Helper.setXCommand(command1: "led rainbow 0.3", command2: "led s")
+//        Helper.setYCommand(command1: "buzzer 5000", command2: "buzzer stop")
+//        Helper.setUpCommand(command1: "rl", command2: "st")
+//        Helper.setDownCommand(command1: "hd", command2: "st")
+//        Helper.setLeftCommand(command1: "servo direct 8500", command2: "cc")
+//        Helper.setRightCommand(command1: "servo direct 6500", command2: "cc")
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -156,7 +171,7 @@ final class LoginVC: UIViewController {
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints {
             $0.top.right.equalToSuperview()
-            $0.left.equalTo(leftMargin())
+            $0.left.equalToSuperview()
             $0.height.equalTo(DeviceSize.type() == .iPhone ? 50 : 80)
         }
 
@@ -164,6 +179,13 @@ final class LoginVC: UIViewController {
         hostLabel.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(15)
             $0.centerX.equalToSuperview().offset(-1 * self.view.layer.width/3)
+        }
+
+        headerView.addSubview(helpButton)
+        helpButton.snp.makeConstraints {
+            $0.size.equalTo(30)
+            $0.right.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
         }
 
         self.view.addSubview(hostnameTextField)
@@ -233,8 +255,16 @@ final class LoginVC: UIViewController {
                     let vc = ShellVC()
                     self.present(vc, animated: true)
                 } else {
-                    Alert.notice(title: "入力漏れ", message: "全項目入力してください")
+                    Alert.notice(title: "some info. is no entered", message: "")
                 }
+            })
+            .disposed(by: disposeBag)
+
+        self.helpButton.rx.tap
+            .subscribe(onNext: {
+                Alert.help(title: "How to use",
+                           message: "Connect to the network to which the robot is connected."
+                )
             })
             .disposed(by: disposeBag)
     }
@@ -273,21 +303,33 @@ extension LoginVC: UITextFieldDelegate {
             self.usernameTextField.becomeFirstResponder()
         } else if textField === self.portTextField {
             self.usernameTextField.becomeFirstResponder()
-        } else if textField === self.usernameTextField && self.passwordTextField.isEnabled {
+        } else if textField === self.usernameTextField {
             self.passwordTextField.becomeFirstResponder()
+        } else {
+            self.passwordTextField.resignFirstResponder()
+            if self.isValidConfiguration() {
+                self.setCurrentData()
+                let vc = ShellVC()
+                self.present(vc, animated: true)
+            } else {
+                Alert.notice(title: "some info. is no entered", message: "")
+            }
         }
 
         return false
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField === self.passwordTextField {
-            UIView.animate(withDuration: 0.1, animations: { () in
-                let transform = CGAffineTransform(translationX: 0, y: -100)
-                self.view.transform = transform
-            })
+        if textField === self.passwordTextField || textField === self.userNameLabel {
+            if DeviceSize.type() == .iPhone {
+                UIView.animate(withDuration: 0.1, animations: { () in
+                    let transform = CGAffineTransform(translationX: 0, y: -100)
+                    self.view.transform = transform
+                })
+            }
         }
 
         return true
     }
+
 }

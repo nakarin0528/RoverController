@@ -19,10 +19,12 @@
 		DB1B219522EC68F50027223D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B219422EC68F50027223D /* Helper.swift */; };
 		DB1B219722EC93250027223D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B219622EC93250027223D /* HeaderView.swift */; };
 		DB1B219922ECA1E60027223D /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B219822ECA1E60027223D /* DeviceSize.swift */; };
+		DB53D6B822FEE8C100F13BF9 /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB53D6B722FEE8C100F13BF9 /* ControllerView.swift */; };
 		DBC317FE22E9EC41000AAC8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC317FD22E9EC41000AAC8D /* AppDelegate.swift */; };
 		DBC3180022E9EC41000AAC8D /* ShellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC317FF22E9EC41000AAC8D /* ShellVC.swift */; };
 		DBC3180522E9EC42000AAC8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBC3180422E9EC42000AAC8D /* Assets.xcassets */; };
 		DBC3180822E9EC42000AAC8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBC3180622E9EC42000AAC8D /* LaunchScreen.storyboard */; };
+		DBE83DB4230106670013EA44 /* LaunchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE83DB3230106670013EA44 /* LaunchVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +41,14 @@
 		DB1B219422EC68F50027223D /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		DB1B219622EC93250027223D /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		DB1B219822ECA1E60027223D /* DeviceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
+		DB53D6B722FEE8C100F13BF9 /* ControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
 		DBC317FA22E9EC41000AAC8D /* RoverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC317FD22E9EC41000AAC8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBC317FF22E9EC41000AAC8D /* ShellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellVC.swift; sourceTree = "<group>"; };
 		DBC3180422E9EC42000AAC8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBC3180722E9EC42000AAC8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBC3180922E9EC42000AAC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBE83DB3230106670013EA44 /* LaunchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVC.swift; sourceTree = "<group>"; };
 		EE44019A80912657DE2C4B5B /* Pods_RoverClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoverClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				DBC317FF22E9EC41000AAC8D /* ShellVC.swift */,
+				DB53D6B722FEE8C100F13BF9 /* ControllerView.swift */,
 			);
 			path = ShellVC;
 			sourceTree = "<group>";
@@ -82,6 +87,7 @@
 			children = (
 				DB1B217622EBD89C0027223D /* LoginView */,
 				DB03F76522EA064000510357 /* ShellVC */,
+				DBE83DB3230106670013EA44 /* LaunchVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -287,12 +293,14 @@
 				DB1B219322EC68C60027223D /* ExUIViewController.swift in Sources */,
 				DB1B217822EBD8AF0027223D /* LoginVC.swift in Sources */,
 				DB1B219222EC68C60027223D /* ExUIImage.swift in Sources */,
+				DBE83DB4230106670013EA44 /* LaunchVC.swift in Sources */,
 				DB1B219022EC68C60027223D /* AppExtension.swift in Sources */,
 				DB1B219722EC93250027223D /* HeaderView.swift in Sources */,
 				DBC317FE22E9EC41000AAC8D /* AppDelegate.swift in Sources */,
 				DB1B218322EBDF030027223D /* Constant.swift in Sources */,
 				DB1B218922EC688F0027223D /* Alert.swift in Sources */,
 				DB1B219522EC68F50027223D /* Helper.swift in Sources */,
+				DB53D6B822FEE8C100F13BF9 /* ControllerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,15 +439,18 @@
 			baseConfigurationReference = CBC337B545701922C21157D4 /* Pods-RoverClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 922P3K9888;
 				INFOPLIST_FILE = RoverClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nakarin.RoverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "robot controller";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -450,15 +461,18 @@
 			baseConfigurationReference = 782C5BE78A00DB6C78EEAC69 /* Pods-RoverClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 922P3K9888;
 				INFOPLIST_FILE = RoverClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nakarin.RoverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "robot controller";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

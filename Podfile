@@ -12,4 +12,5 @@ target 'RoverClient' do
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
   pod 'SwiftyUserDefaults', '~> 4.0'
+  pod 'BRHJoyStickView'
 end

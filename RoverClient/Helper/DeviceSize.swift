@@ -21,7 +21,7 @@ struct DeviceSize {
 //            return iPhoneType.iPhone8
 //        case 1080, 1242:
 //            return iPhoneType.iPhone8Plus
-        case 0 ..< 1126:
+        case 0 ..< 1243:
             return DeviceType.iPhone
         default:
             return DeviceType.other
