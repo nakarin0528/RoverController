@@ -13,5 +13,7 @@ Just connect to robot's microcomputer (SSH).
 You can use terminal to run robot program.
 The controller has setting mode that ables you to edit your commands to any button you like on the game controller.
 
+But, you need to develop robot program.
+
 # Demo
 ![2019-12-15 21 39 00](https://user-images.githubusercontent.com/22139186/70862757-bf5de500-1f83-11ea-81ca-62b0985bc055.gif)
